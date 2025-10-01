@@ -1,0 +1,88 @@
+#include <Stepper.h>
+
+
+//MACROS
+
+enum linActDir{EXTEND, RETRACT};
+
+enum stepperDir{CLOCKWISE,COUNTERCLOCKWISE};
+
+//drive25mmLinAct(int, int, linActDir);
+
+//drive50mmLinAct(int, int, linActDir);
+
+
+/*Linear rail specs:
+Speed: 250
+StepsPerRev: 200
+IN1 = D5;
+IN2 = D4;
+IN3 = D3;
+IN4 = D6;
+*/
+
+/*NEMA 23 specs:
+
+IN1 = D5
+IN2 = D4
+IN3 = D3
+IN4 = D6
+
+*/
+
+const int Enable = 2;
+const int NEMA23IN1 = 31;
+const int NEMA23IN2 = 32;
+const int NEMA23IN3 = 33;
+const int NEMA23IN4 = 34;
+const int NEMA23StepsPerRev = 200;
+Stepper NEMA23Wheel(NEMA23StepsPerRev, NEMA23IN1, NEMA23IN2, NEMA23IN3, NEMA23IN4);
+
+
+const int in1 = 31;
+const int in2 = 32;
+
+linActDir directionTmp = RETRACT;
+stepperDir dir = CLOCKWISE;
+//int directionTmp = 1;
+  
+void setup() {
+  // Ferris wheel NEMA23 stepper setup
+  /*
+  NEMA23Wheel.setSpeed(250);
+  pinMode(Enable, OUTPUT);
+  pinMode(NEMA23IN1, OUTPUT);
+  pinMode(NEMA23IN2, OUTPUT);
+  pinMode(NEMA23IN3, OUTPUT);
+  pinMode(NEMA23IN4, OUTPUT);
+  digitalWrite(NEMA23WheelEnable, HIGH);
+  */
+  
+  pinMode(31,OUTPUT);
+  pinMode(32,INPUT);
+  digitalWrite(Enable, HIGH);
+  Serial.begin(9600);
+  
+
+  pinMode(31,OUTPUT);
+  pinMode(32,OUTPUT);
+  pinMode(33,OUTPUT);
+  pinMode(34,OUTPUT);
+  NEMA23Wheel.setSpeed(200);
+  
+}
+
+void loop() {
+
+    //digitalWrite(31, LOW);
+    //digitalWrite(32, HIGH);
+
+    NEMA23Wheel.step(200);
+    //driveStepper(NEMA23Wheel,200,dir);
+    //drive25mmLinAct(in1,in2,directionTmp);
+
+    //digitalWrite(3,HIGH);
+    //digitalWrite(3,HIGH);
+    //NEMA23Wheel.step(200);
+
+}
